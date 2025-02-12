@@ -20,8 +20,7 @@ exports.register = async (req, res, next) => {
 
     res.status(201).json({
       message: "User registered successfully",
-      token,
-      user: { id: user._id, email: user.email },
+      data: { token, user: { id: user._id, email: user.email } },
     });
   } catch (error) {
     next(error);
@@ -41,8 +40,7 @@ exports.login = async (req, res, next) => {
 
     res.status(200).json({
       message: "Login successful",
-      token,
-      user: { id: user._id, email: user.email },
+      data: { token, user: { id: user._id, email: user.email } },
     });
   } catch (error) {
     next(error);
