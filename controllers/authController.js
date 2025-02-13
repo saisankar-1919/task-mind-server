@@ -30,7 +30,7 @@ exports.register = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email }).select("+password");
+    const user = await User.findOne({ email });
 
     if (!user || !(await comparePassword(password, user.password))) {
       return next(new AppError("Invalid email or password", 400));
