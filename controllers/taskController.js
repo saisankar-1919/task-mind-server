@@ -1,14 +1,8 @@
 const Task = require("../models/Task");
-const {
-  hashPassword,
-  comparePassword,
-  generateToken,
-  AppError,
-  asyncHandler,
-} = require("./utils");
+const { AppError, asyncHandler } = require("./utils");
 
 exports.getTasks = asyncHandler(async (req, res) => {
-  const tasks = await Task.find({ userId: req.userId });
+  const tasks = await Task.find({ user_id: req.user_id });
   res.json(tasks);
 });
 
@@ -19,7 +13,11 @@ exports.createTask = asyncHandler(async (req, res, next) => {
     throw new AppError("Title and description are required", 400);
   }
 
-  const newTask = await Task.create({ userId: req.userId, title, description });
+  const newTask = await Task.create({
+    user_id: req.user_id,
+    title,
+    description,
+  });
 
   res
     .status(201)
