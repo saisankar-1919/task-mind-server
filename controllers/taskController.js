@@ -3,7 +3,7 @@ const { AppError, asyncHandler } = require("./utils");
 
 exports.getTasks = asyncHandler(async (req, res) => {
   const tasks = await Task.find({ user_id: req.user_id });
-  res.json(tasks);
+  res.json(tasks.reverse());
 });
 
 exports.createTask = asyncHandler(async (req, res, next) => {

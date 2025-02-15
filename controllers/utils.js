@@ -1,7 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-// Hash and compare passwords
 const hashPassword = async (password) => {
   return await bcrypt.hash(password, 10);
 };
@@ -11,7 +10,7 @@ const comparePassword = async (password, hashedPassword) => {
 };
 
 const generateToken = (userId) => {
-  return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "1h" });
+  return jwt.sign({ userId }, process.env.JWT_SECRET);
 };
 
 class AppError extends Error {
